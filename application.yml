@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:admin@todoappdevdb.8eaekvs.mongodb.net/
+      database: todoAppDevDB
