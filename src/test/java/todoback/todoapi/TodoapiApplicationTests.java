@@ -1,10 +1,10 @@
-package todoapi.todoback;
+package todoback.todoapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TodobackApplicationTests {
+class TodoapiApplicationTests {
 
 	@Test
 	void contextLoads() {
