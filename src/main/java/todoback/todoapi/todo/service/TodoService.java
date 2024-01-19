@@ -18,7 +18,7 @@ public class TodoService {
     }
 
     public Todo createTodo(Todo todo){
-        return todoRepository.save(new Todo(todo.getDescription()));
+        return todoRepository.save(new Todo(todo.getTitle(), todo.getDescription()));
     }
 
     public String handleDeleteTodo(String todoId) throws Exception {
