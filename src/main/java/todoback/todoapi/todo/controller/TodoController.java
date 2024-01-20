@@ -10,6 +10,7 @@ import todoback.todoapi.todo.service.TodoService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/todo")
 public class TodoController {
 
