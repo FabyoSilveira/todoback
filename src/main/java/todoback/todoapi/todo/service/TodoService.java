@@ -18,7 +18,7 @@ public class TodoService {
     }
 
     public Todo createTodo(Todo todo){
-        return todoRepository.save(new Todo(todo.getTitle(), todo.getDescription()));
+        return todoRepository.save(new Todo(todo.getTitle(), todo.getDescription(), todo.getPriority()));
     }
 
     public String handleDeleteTodo(String todoId) throws Exception {
@@ -50,6 +50,7 @@ public class TodoService {
     private Todo updateTodo(Todo currentTodo, Todo newTodo){
         currentTodo.setDescription(newTodo.getDescription());
         currentTodo.setCompleted(newTodo.isCompleted());
+        currentTodo.setPriority(newTodo.getPriority());
 
         return todoRepository.save(newTodo);
     }

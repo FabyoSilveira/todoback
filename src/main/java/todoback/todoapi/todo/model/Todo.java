@@ -26,12 +26,12 @@ public class Todo {
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
-    public Todo(String title, String description) {
+    public Todo(String title, String description, int priority) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.description = description;
         this.completed = false;
-        this.priority = 1;
+        this.priority = priority;
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
