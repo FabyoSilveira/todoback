@@ -57,7 +57,7 @@ public class TodoService {
         currentTodo.setCompleted(newTodo.isCompleted());
         currentTodo.setPriority(newTodo.getPriority());
 
-        return todoRepository.save(newTodo);
+        return todoRepository.save(currentTodo);
     }
 
     private Todo getIfTodoExists(String todoId) throws Exception {
