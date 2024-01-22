@@ -1,7 +1,6 @@
 package todoback.todoapi.todo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.MissingRequiredPropertiesException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +8,6 @@ import todoback.todoapi.todo.model.Todo;
 import todoback.todoapi.todo.service.TodoService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
