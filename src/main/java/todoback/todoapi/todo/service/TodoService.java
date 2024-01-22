@@ -1,14 +1,12 @@
 package todoback.todoapi.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.MissingRequiredPropertiesException;
 import org.springframework.stereotype.Service;
 import todoback.todoapi.todo.model.Todo;
 import todoback.todoapi.todo.repository.TodoRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -20,12 +18,12 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Optional<Todo> getTodo(String todoId){
+    public Todo getTodo(String todoId) {
         if(todoId.isEmpty()){
             throw new IllegalArgumentException();
         }
 
-        return todoRepository.findById(todoId);
+        return getIfTodoExists(todoId);
     }
 
     public Todo createTodo(Todo todo){
