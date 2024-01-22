@@ -57,6 +57,7 @@ public class TodoService {
     }
 
     private Todo updateTodo(Todo currentTodo, Todo newTodo){
+        currentTodo.setTitle(newTodo.getTitle());
         currentTodo.setDescription(newTodo.getDescription());
         currentTodo.setCompleted(newTodo.isCompleted());
         currentTodo.setPriority(newTodo.getPriority());
