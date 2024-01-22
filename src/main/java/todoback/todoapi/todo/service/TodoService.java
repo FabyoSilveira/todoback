@@ -6,6 +6,7 @@ import todoback.todoapi.todo.model.Todo;
 import todoback.todoapi.todo.repository.TodoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -15,6 +16,10 @@ public class TodoService {
 
     public List<Todo> getAll(){
         return todoRepository.findAll();
+    }
+
+    public Optional<Todo> getTodo(String todoId){
+        return todoRepository.findById(todoId);
     }
 
     public Todo createTodo(Todo todo){

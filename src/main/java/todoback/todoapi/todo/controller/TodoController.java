@@ -8,9 +8,10 @@ import todoback.todoapi.todo.model.Todo;
 import todoback.todoapi.todo.service.TodoService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RequestMapping("/todo")
 public class TodoController {
 
@@ -21,6 +22,12 @@ public class TodoController {
     @ResponseStatus(HttpStatus.OK)
     public List<Todo> getAll(){
         return todoService.getAll();
+    }
+
+    @GetMapping("/get/{todoId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<Todo> getTodo(@PathVariable String todoId){
+        return todoService.getTodo(todoId);
     }
 
     @PostMapping("/add")
@@ -42,6 +49,16 @@ public class TodoController {
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> updateTodo(@RequestBody Todo todo) {
+        try{
+            return ResponseEntity.ok(todoService.handleUpdateTodo(todo));
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getLocalizedMessage());
+        }
+    }
+
+    @PutMapping("/complete")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> completeTodo(@RequestBody Todo todo) {
         try{
             return ResponseEntity.ok(todoService.handleUpdateTodo(todo));
         }catch(Exception e){
