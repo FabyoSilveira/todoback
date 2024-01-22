@@ -1,11 +1,13 @@
 package todoback.todoapi.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.MissingRequiredPropertiesException;
 import org.springframework.stereotype.Service;
 import todoback.todoapi.todo.model.Todo;
 import todoback.todoapi.todo.repository.TodoRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -19,6 +21,10 @@ public class TodoService {
     }
 
     public Optional<Todo> getTodo(String todoId){
+        if(todoId.isEmpty()){
+            throw new IllegalArgumentException();
+        }
+
         return todoRepository.findById(todoId);
     }
 
@@ -26,19 +32,15 @@ public class TodoService {
         return todoRepository.save(new Todo(todo.getTitle(), todo.getDescription(), todo.getPriority()));
     }
 
-    public String handleDeleteTodo(String todoId) throws Exception {
-        if(todoId.isEmpty()){
-            throw new Exception("Todo id cannot be empty.");
-        }
-
+    public String handleDeleteTodo(String todoId) throws IllegalArgumentException {
         Todo todoToBeDeleted = getIfTodoExists(todoId);
 
         return this.deleteTodo(todoToBeDeleted);
     }
 
-    private String deleteTodo(Todo todo) throws Exception {
+    private String deleteTodo(Todo todo) throws IllegalArgumentException {
         if(todo.getId().isEmpty()){
-            throw new Exception("Provide a todo item id to be deleted!");
+            throw new IllegalArgumentException();
         }
 
         todoRepository.deleteById(todo.getId());
@@ -46,9 +48,9 @@ public class TodoService {
         return "Todo deleted successfully: " + todo.getId();
     }
 
-    public Todo handleUpdateTodo(Todo newTodo) throws Exception {
-        if(newTodo == null){
-            throw new Exception("Provide a todo item to be updated!");
+    public Todo handleUpdateTodo(Todo newTodo) throws IllegalArgumentException {
+        if(newTodo.getTitle().isEmpty()){
+            throw new IllegalArgumentException();
         }
 
         Todo currentTodo = getIfTodoExists(newTodo.getId());
@@ -64,11 +66,11 @@ public class TodoService {
         return todoRepository.save(currentTodo);
     }
 
-    private Todo getIfTodoExists(String todoId) throws Exception {
+    private Todo getIfTodoExists(String todoId) throws NoSuchElementException {
         try{
             return todoRepository.findById(todoId).get();
         }catch(Exception e) {
-            throw new Exception("Todo does not exist in the database.");
+            throw new NoSuchElementException("Todo does not exist in the database.");
         }
     }
 }
