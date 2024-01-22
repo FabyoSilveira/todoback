@@ -36,7 +36,11 @@ public class TodoService {
         return this.deleteTodo(todoToBeDeleted);
     }
 
-    private String deleteTodo(Todo todo){
+    private String deleteTodo(Todo todo) throws Exception {
+        if(todo.getId().isEmpty()){
+            throw new Exception("Provide a todo item id to be deleted!");
+        }
+
         todoRepository.deleteById(todo.getId());
 
         return "Todo deleted successfully: " + todo.getId();
